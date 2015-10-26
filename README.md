@@ -2,7 +2,7 @@
 
 [ ![Codeship Status](https://codeship.com/projects/70c0b520-567b-0133-5c51-5ebc52a48109/status?branch=master)](https://codeship.com/projects/109381)
 
-The backend of a simple trip planning web application built with Rails 4 + Devise.
+The backend of a simple trip planning web application built with Rails 4 + Devise. Front end over at https://github.com/williamcoates/trips-frontend. 
 
 ## Local development
 
