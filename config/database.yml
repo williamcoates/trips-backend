@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: trips-project_development
+
+test:
+  <<: *default
+  database: trips-project_test
+
+production:
+  <<: *default
+  database: trips-project_production
+  username: trips-project
+  password: <%= ENV['TRIPS-PROJECT_DATABASE_PASSWORD'] %>
