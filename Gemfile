@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.2.3"
+ruby '2.2.3'
 
 # Rails + core libs
 gem 'rails', '4.2.4'
