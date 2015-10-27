@@ -1,6 +1,7 @@
 language: ruby
 rvm:
-     - 2.2.0
-     - 2.2.1
-     - 2.2.2
      - 2.2.3
+addons:
+  postgresql: "9.3"
+before_script:
+  - psql -c 'create database trips-project_test;' -U postgres
