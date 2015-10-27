@@ -1,14 +1,13 @@
+# rubocop:disable Metrics/LineLength
 require 'rails_helper'
 
 describe TripsController do
-
   let(:trip) { create(:trip) }
   let(:other_trip) { create(:trip) }
   let(:user) { trip.user }
   let(:other_user) { trip.user }
 
   context 'when logged in as a regular user' do
-
     before do
       sign_in user
     end
@@ -58,7 +57,6 @@ describe TripsController do
     end
 
     context 'validation' do
-
       it 'wont allow creating trips with illogical dates' do
         post :create, format: :json, trip:
             { destination: 'Foo', start_date: '2000-01-02', end_date: '2000-01-01', comment: 'Foo' }
@@ -69,13 +67,10 @@ describe TripsController do
         patch :update, id: trip.id, format: :json, trip: { start_date: trip.end_date + 1 }
         expect(response).to have_http_status(:bad_request)
       end
-
     end
-
   end
 
   context 'when logged in as an admin' do
-
     let(:admin) { create(:admin) }
 
     before do
@@ -94,11 +89,9 @@ describe TripsController do
       trip.reload
       expect(trip.destination).to eql('Foo')
     end
-
   end
 
   context 'when not logged on' do
-
     it 'wont allow you to list trips' do
       get :index, format: :json
       expect(response).to have_http_status(:unauthorized)
@@ -118,7 +111,5 @@ describe TripsController do
       patch :update, format: :json, id: trip.id, trip: { destination: 'Foo' }
       expect(response).to have_http_status(:unauthorized)
     end
-
   end
-
 end

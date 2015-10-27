@@ -1,7 +1,7 @@
+# rubocop:disable Metrics/LineLength
 require 'rails_helper'
 
 describe RegistrationsController do
-
   before do
     @request.env['devise.mapping'] = Devise.mappings[:user]
   end
@@ -35,5 +35,4 @@ describe RegistrationsController do
     expect(response).to have_http_status(:unprocessable_entity)
     expect(json_response[:errors][:email].first).to match(/is invalid/)
   end
-
 end

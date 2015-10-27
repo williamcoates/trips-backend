@@ -1,3 +1,5 @@
+# Currently two levels of access: :user or :admin. Admins can CRUD any
+# trip, users can only CRUD their own trips
 class TripsController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_access, only: [:destroy, :update]
@@ -28,9 +30,8 @@ class TripsController < ApplicationController
 
   def ensure_access
     @trip = Trip.find(params[:id])
-    unless @trip.has_access?(current_user)
-      render json: { error: "You do not have access to manage that trip!" }, status: 401
-    end
+    return if @trip.accessible_by?(current_user)
+    render json: { error: 'You do not have access to manage that trip!' }, status: 401
   end
 
   def render_400(error)
@@ -44,7 +45,8 @@ class TripsController < ApplicationController
   end
 
   def create_trip_params
-    params.require(:trip).permit(:id, :destination, :start_date, :end_date, :comment)
+    params
+      .require(:trip)
+      .permit(:id, :destination, :start_date, :end_date, :comment)
   end
-
 end
